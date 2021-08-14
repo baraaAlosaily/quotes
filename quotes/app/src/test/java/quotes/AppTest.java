@@ -3,8 +3,8 @@
  */
 package quotes;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
+
+import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -14,21 +14,19 @@ import java.net.URL;
 import java.util.List;
 import java.util.Random;
 
+import com.google.gson.Gson;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
 // Lab 8
     @Test void appHasAGreeting() throws FileNotFoundException {
-        Gson gson=new Gson();
         Reader reader =new FileReader("../app/src/main/resources/recentquotes.json");
-
         Type collectionsType=new TypeToken<List<Books>>(){}.getType();
         List<Books> booksList= new Gson().fromJson(reader,collectionsType);
-
         Random random=new Random();
         int ranNum= random.nextInt((booksList.size()-1)+1);
         String str=booksList.get(ranNum).toString();
-
         assertEquals(str,booksList.get(ranNum).toString());
 
     }
